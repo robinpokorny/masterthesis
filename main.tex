@@ -1,0 +1,319 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{enumerate}
+
+
+\title{Master Thesis - notes}
+\author{Robin Pokorný\\
+\small \texttt{robin@medvedi.eu}\\
+}
+\date{}
+
+\newtheorem{theorem}{Theorem}
+\theoremstyle{definition}
+\newtheorem{define}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}	
+\theoremstyle{remark}
+\newtheorem*{note}{Note}
+\begin{document}
+
+\maketitle
+
+\section*{Products of sequential spaces}
+
+\begin{define}\label{def:prodseq}
+Let $(X, \Xi_X)$ and $(Y, \Xi_Y)$ be sequential spaces. We say that $\{(x_n, y_n)\}\subset X\times Y$ \emph{converges} to $(x, y)\in X\times Y$ if $(\{x_n\}, x)\in \Xi_X$ and $(\{y_n\}), y)\in \Xi_Y$.
+This defines the (coordinatewise) \emph{product sequential structure} on $X\times Y$.
+\end{define}
+
+\section*{Sequential semigroups and groups}
+
+\begin{define}\label{def:seqgr}
+A \emph{right sequential semigroup} is a semigroup $S$ equipted with a sequential structure $\Xi$ such that for all $a\in S$, the right action $\varrho_a$ of $a$ on $S$ is a continuous mapping of the space S to itself. That is
+\[
+    x_n\to x \Rightarrow \varrho_a(x_n)=x_na\to xa=\varrho_a(x).
+\]
+A \emph{left sequential semigroup} is a semigroup $S$ equipted with a sequential structure $\Xi$ such that for all $a\in S$, the left action $\lambda_a$ of $a$ on $S$ is a continuous mapping of the space S to itself. That is
+\[
+    x_n\to x \Rightarrow \lambda_a(x_n)=ax_n\to ax=\lambda_a(x).
+\]
+
+A \emph{semisequential semigroup} is a right sequential semigroup which is also a left sequential semigroup.
+
+A \emph{sequential semigroup} is a semigroup $S$ equipted with a sequential structure $\Xi$ such that the multiplication in S, as a mapping of $S\times S$ to $S$ is (jointly) continuous. That is
+\[
+    x_n\to x, y_n\to y \Rightarrow x_ny_n\to xy.
+\]
+
+A \emph{right sequential (left sequential, semisequential) monoid} is a right sequential (left sequential, semisequential) semigroup with identity $e$.
+
+A \emph{right (left) sequential group} is a right (left) sequential semigroup whose underlying semigroup is a group, and a \emph{semisequential group} is a right sequential group which is also a left sequential group.
+
+A \emph{parasequential group} is a group $G$ equipted with a sequential structure $\Xi$ such that the multiplication in G, as a mapping of $G\times G$ to $G$ is (jointly) continuous. That is
+\[
+    x_n\to x, y_n\to y \Rightarrow x_ny_n\to xy.
+\]
+
+A \emph{quasisequential group} is a semisequential group $G$ such that the inverse mapping $^{-1}: G\to G$ is continuous. That is
+\[
+    x_n\to x \Rightarrow x_n^{-1}\to x^{-1}.
+\]
+
+A \emph{sequential group} is a parasequential group $G$ such that the inverse mapping $^{-1}: G\to G$ is continuous.
+\end{define}
+
+\begin{theorem}\label{th:equvseqgr}
+A group $G$ with a sequential structure $\Xi$ is a sequential group iff $(x,y)\mapsto xy^{-1}$ is a continuous mapping of $G\times G$ to $G$, that is
+\[
+    (\{x_n\},x), (\{y_n\},y) \in \Xi \Rightarrow x_ny_n^{-1}\to xy^{-1}.
+\]
+\end{theorem}
+
+\begin{example}
+A group (semigroup) with discrete sequential strunture is a sequential group (semigroup).
+\end{example}
+
+As we will ask when a group admits a sequential structure, to exclude this trivial solution we should look for non-dictrete sequential structures, also called \emph{non-trivial}.
+
+\begin{example}
+Let $S=\mathbb{R}\cup\{\alpha\}$ be the Alexandroff compactification of the space of real numbers. Define multiplication on $S$ by
+\[
+    xy=\left\{ \begin{array}{ll}x+y, & \mathrm{if}\ x,y\in\mathbb{R}; \\ \alpha, & \mathrm{otherwise}. \end{array} \right.
+\]
+With this operation $S$ is a semisequential semigroup; however, it is not a sequential semigroup as the multiplication is not continuous at $(\alpha, \alpha)$.
+\end{example}
+
+\begin{define}\label{def:spxx}
+For a sequential space $X$, let $S_p(X,X)$ be the semigroup of all mappings of the set $X$ to $X$, taken with the topology of pointwise convergence. That is
+\[
+    f_n\in S_p(X,X)\to f\in S_p(X,X) \Rightarrow \forall x\in X, f_n(x)\to f(x). 
+\]
+
+Let $C_p(X,X)$ be the semigroup of all continuous mapping of $X$ to $X$, taken as a subsemigroup of $S_p(X,X)$.
+\end{define}
+
+\begin{theorem}\label{th:rseqspxx}
+For any sequential space $X$, $S_p(X,X)$ is a right sequential semigroup.
+\end{theorem}
+\begin{proof}
+Let $f_n,f,g\in S_p(X,X)$, $f_n\to f$ and $x\in X$, then $g(x)\in X$ and since
+\[
+    (f_ng)(x)=f_n(g(x))\to f(g(x))=(fg)(x),
+\]
+we have $\varrho_g(f_n)\to\varrho_g(f)$. Mapping $g\in S_p(X,X)$ was arbitrary, therefore $S_p(X,X)$ is a right sequential semigroup.
+\end{proof}
+
+\begin{theorem}\label{th:sseqcpxx}
+For any sequential space $X$, $C_p(X,X)$ is a semisequential semigroup.
+\end{theorem}
+\begin{proof}
+From Theorem \ref{th:rseqspxx} it follows that $C_p(X,X)$ if a right sequential semigroup.
+
+To show the statenemt of the theorem, let $g_n,g,f\in C_p(X,X)$, $g_n\to g$ and $x\in X$.
+Then $g_n(x)\to g(x)$ in $X$ and since $f$ is continuous we obtain
+\[
+    (fg_n)(x)=f(g_n(x))\to f(g(x))=(fg)(x).
+\]
+That is the left action $\lambda_f$ is continuous. Therefore $C_p(X,X)$ is a left sequential semigroup.
+\end{proof}
+
+\begin{theorem}\label{th:dicsontla}
+For $f\in S_p(X,X)\setminus C_p(X,X)$ discontinuous, the left action $\lambda_f$ is discontinuous on $S_p(X,X)$.
+\end{theorem}
+\begin{proof}
+As $f$ is discontinuous there exists a sequence $y_n$ in $X$ converging to $y\in X$, such that $f(y_n)\not\to f(y)$ (in $X$).
+
+Let $g_n\in S_p(X,X): x\mapsto y_n$. Then it is easy to see that $g_n\to g$, where $g: x\mapsto y$. But the left action $\lambda_f$ is not continuous at $g$ because
+\[
+    (fg_n)(x)=f(g_n(x))=f(x_n)\not\to f(x)=f(g(x))=(fg)(x).
+\]
+\end{proof}
+
+\begin{theorem}\label{th:spdicscr}
+For any sequential space $X$ the following statements are equivalent:
+\begin{enumerate}[(i)]
+	\item $S_p(X,X)$ is a sequential semigroup.
+	\item $S_p(X,X)$ is a semisequential semigroup.
+	\item The space $X$ is discrete.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+A sequential semigroup is trivially a semisequential semigroup.
+
+If $X$ is a discrete, then every mapping is continuous. Therefore we have $S_p(X,X) = C_p(X,X)$ which a semisequential semigroup by Theorem \ref{th:sseqcpxx}. Moreover it is a sequential semigroup. Let $f_n\to f$ and $g_n\to g$ be arbitrary convergent sequences in $C_p(X,X)$. As $X$ is discrete $f_n\to f$ if and only if $\exists n_0\forall n>n_0\ \forall x\in X, f_n(x) = f(x)$. Then there exits $n_1$ such that $f_n=f$ and $g_n=g$ for all $n>n_1$, so $f_ng_n = fg$ and $f_ng_n \to fg$. Hence $C_p(X,X)$ has a jointly continuous multiplication, and (iii) implies (i).
+
+Let $S_p(X,X)$ be a semisequential semigroup and assume for contradiction that $X$ is not discrete. Then all left actions $\lambda_f$ are continuous in $S_p(X,X)$ and, by Theorem \ref{th:dicsontla}, all mappings $f: X\to X$ are continuous. Since $X$ is not discrete there exist a point $x\in X$ and a seqeunce $\{x_n\}\subset X$ such that $x_n \neq x$ for all $n$ and $x_n\to x$ in $X$. Let a function $f$ of $X$ to $X$ be
+\[
+    f(y)=\left\{ \begin{array}{ll} x, & \mathrm{if}\ y = x; \\ x_1, & \mathrm{otherwise}. \end{array} \right.
+\]
+Then $f$ is not continuous because $f(x_n) = x_1$ for all $n$ and so
+\[
+    f(x_n) \to x_1 \neq x = f(x).
+\]
+That is, $X$ is discrete, which finishes the proof.
+\end{proof}
+
+
+\subsection*{Homomorphisms on sequential groups}
+For our convenience in the following we formulate and prove theorems for right sequential groups. It is easy to modify them for left sequential groups. 
+
+\begin{theorem}\label{th:rahomeo}
+Let $G$ be a right sequential group and $g\in G$ be an arbitrary element. Then the right action $\varrho_g$ is a homeomorphism of the space $G$ into itself.
+\end{theorem}
+\begin{proof}
+Clearly in a right sequential group, the right action $\varrho_g$ is a continuous bijection. Since $\varrho_g\circ\varrho_{g^{-1}}$ is the identity mapping, it follows that the inverse mapping $\varrho_g^{-1}=\varrho_{g^{-1}}$ is also continuous.
+\end{proof}
+
+\begin{theorem}\label{th:contate}
+Let $f: G\to H$ be a (group) homomorphism of right sequential groups.
+Then the following are equivalent:
+\begin{enumerate}[(i)]
+	\item $f$ is continuous.
+	\item $f$ is continuous at $e_G$; that is, for every sequence $\{x_n\}$ in $G$, such that $x_n\to e_G$, it holds that $f(x_n)\to f(e_G)$ in $H$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Clearly any continuous function is continuous at all points, hence also at $e_G$.
+
+Let $f$ be continuous at $e_G$ and $\{x_n\}$ be a sequence in $G$ converging to a point $x\in G$. We show that $f(x_n)\to f(x)$ in H. Because $G$ is a right sequential group $\varrho_{x^{-1}}$ is continuous, by the previous theorem, so $x_nx^{-1}\to xx^{-1}=e_G$. Then $f(x_nx^{-1})\to f(e_G)$. Using the properties of homomorphism $f$ we obtain:
+\[
+	f(x_nx^{-1})=f(x_n)f(x^{-1})=f(x_n)f(x)^{-1}\to f(e_G) = e_H.
+\]
+In right sequential group $H$ the right action $\varrho_{f(x)}$ is continuous, meaning
+\[
+	f(x_n)=f(x_n)f(x^{-1})f(x)=\varrho_{f(x)}(f(x_n)f(x^{-1}))\to \varrho_{f(x)}(e_H)=f(x).
+\]
+\end{proof}
+
+\begin{define}\label{def:homogen}
+A sequential space $X$ is said to be \emph{homogeneous} if for arbitrary two points $x,y\in X$, there exists a homeomorphism $f$ of space $X$ onto itself such that $f(x)=y$. 
+\end{define}
+
+\begin{theorem}\label{th:homogengr}
+Every right sequential group is a homogeneous space.
+\end{theorem}
+\begin{proof}
+For any two points $x,y$ in the group put $z=x^{-1}y$. Then from Theorem \ref{th:rahomeo} the right action $\varrho_z$ is a homeomorphism and the following holds
+\[
+	\varrho_z(x)=xz=xx^{-1}y=y.
+\]
+\end{proof}
+
+From Theorem \ref{th:homogengr} it follows that, for a group $G$, to make $G$ into a sequential group, we can only use homogeneous sequential structures.
+
+A convenient property of homogeneous spaces is that they behave in the same way at any point. When we know property of a sequential structure at a certain point of such space we can deduce it properties everywhere. The point we will examine the convergence at will be the identity of the group. Then using left and right translations we will move the defined sequential behavior around.
+
+Let $\Theta=\{\{x_n^\alpha\}, \alpha\in A\}$ be a family of sequences in a group $G$. We say a sequence $\{x_n\}$ of points in $G$ $\Theta$-converges to identity $e$ if there exist $\alpha_0\in A$, a subsequence $\{x_{i_n}^{\alpha_0}\}$ of $\{x_n^{\alpha_0}\}$, and $n_0$ such that $x_{i_n}^{\alpha_0} = x_n$ for every $n>n_0$. We will write $x_n\stackrel{\Theta}{\to} e$.
+
+\begin{theorem}\label{th:grtorsqgr}
+Let $\Theta=\{\{x_n^\alpha\}: \alpha\in A\}$ be a family of sequences in a group $G$ such that for every sequence $x_n$ which $\Theta$-converges to identity $e$ and for every $g\in G$, $g\neq e$, the sequence $x_ng$ does not $\Theta$-converge to identity $e$. Then 
+\[
+    \Xi:=\left\{\left(\{x_ng\right\},g):
+    x_n\stackrel{\Theta}{\to} e, g\in G\right\}
+\]
+is a sequential structure turning $G$ into a right sequential group.
+\end{theorem}
+\begin{proof}
+First we show that the right action $\varrho_h$ is $\Xi$-continuous for arbitrary $h\in G$. Let $g_n\to g$ in $G$; then, by definition of $\Xi$, there exists a sequence $x_n$, such that $x_n\stackrel{\Theta}{\to} e$ and $g_n=x_ng$ for all $n$. It follows that $g_nh=x_ngh$ for all $n$. As $gh\in G$ we have $x_ngh\to gh$ by definition of $\Xi$. We obtain
+\[
+    \varrho_h(g_n)=g_nh=x_ngh\to gh = \varrho_h(g).
+\]
+
+It remains to prove that $\Xi$ is a sequential structure on $G$, that is, it complies to the conditions (C1) - (C4) in [BP].
+
+Let $\{g_n\}$ be sequence in $G$ such that $g_n\to g$ for some $g\in G$, let furthermore $\{h_k\}$ be a subsequence of $\{g_n\}$. We want to show that $\{h_k\}$ also converges to $g$. There exists a sequence $\{x_n\}$ for which $x_n\stackrel{\Theta}{\to} e$ and $x_ng=g_n$ for every $n$. Therefore there exists a subsequence $\{x_{n_k}\}$ of $\{x_n\}$ such that $x_{n_k}g=h_k$ for every $k$. By the definition of $\Theta$-convergence, $x_{n_k}\stackrel{\Theta}{\to} e$ and so $h_k=x_{n_k}g\to g$. Hence (C1) holds.
+
+To prove the condition (C2) of uniqueness of a limit let $\{g_n\}$ be a sequence such that $g_n\to g\in G$ and also $g_n\to h\in G$. There then exist two sequences $\{x_n^g\}$ and $\{x_n^h\}$, both $\Theta$-converging to $e$, for which (for all $n$)
+\[
+x_n^gg=g_n=x_n^hh.
+\]
+Therefore $x_n^ggh^{-1}=x_n^h$ for all $n$. If $g\neq h$ then $gh^{-1}\neq e$ and $\{x_n^ggh^{-1}\}$ would not $\Theta$-converge to $e$ - a contradiction as we know that $\{x_n^h\}$ $\Theta$-converges to $e$. Hence the limit is unique: $g=h$.
+
+
+Claim 3: $x_n\stackrel{\Theta}{\not\to} e$
+
+(C3) from Claim 3
+
+(C4) iff $e\stackrel{\Theta}{\to} e$
+\end{proof}
+
+\section*{Sequential Ellis theorem}
+
+In this section we will prove a variation of classic Ellis theorem [Ellis R. - Locally Compact Transformation Groups]: that a (sequentialy) compact semisequencial group is a sequencial group.
+
+\begin{define}\label{def:idnseqstr}
+Let $X$ be a space with a sequential structure $\Xi$ and $Y\subset X$. Then $Y\wedge \Xi$ is the sequential struncture on $Y$ induced by $\Xi$, that is a sequence $\{y_n\}$ in $Y$ converges to $y\in Y$ in $Y\wedge \Xi$ iff $y_n\to y$ in $\Xi$.
+\end{define}
+
+\begin{define}\label{def:}
+Let $X$ be a compact sequential space and let $T$ a group of homeomorphisms on $X$. The map $\pi: (X,T)\to X$ is defined with the following equality for $\forall x\in X$ and $\forall t\in T$:
+\[
+    \pi(x,t) = t(x).
+\]
+\end{define}
+
+\begin{theorem}\label{th:}
+Let $X$ be a compact sequential space, $T$ a group of homeomorphisms on $X$ with a sequential structure $\Xi$ such that $(T,\Xi)$ is admissible. Then $\pi$ is continuous.
+\end{theorem}
+\begin{proof}
+TBD
+\end{proof}
+
+\begin{theorem}[Sequential Ellis]\label{th:sqellis}
+A compact semisequencial group $X$ is a sequencial group.
+\end{theorem}
+\begin{proof}
+The space $X$ may be identified wit the set of mappings $x\mapsto xy$ of $X$ onto $X$. The sequential structure of $X$ under this identification coicides with $X\wedge C_p(X,X)$. The map $(x,y)\mapsto xy$ of $(X,X)$ into $X$ is continuous fron the previous Theorem. Therefore $X$ is a sequential group (TBD, AT 2.3.3 or 2.3.10+11, p. 110).
+\end{proof}
+
+\section*{Products of sequential groups}
+
+\begin{theorem}\label{th:seqgrprod}
+Let $\{G_\alpha, \alpha\in A\}$ be a family of sequential groups, and $G=\prod_{\alpha\in A}G_\alpha$ be the coordinatewise product of sequential spaces $G_\alpha$. Then $G$ is a sequential group.
+\end{theorem}
+\begin{proof}
+The product operation (resp. inverse) in the group $G$ can be represented as the Cartesian product of the product operations (resp. inverses) in the groups $G_\alpha$. So both, the product operation and the inverse, are continuous in $G$, and $G$ is a sequential group.
+\end{proof}
+
+
+\begin{example}
+By $D$ we denote the discrete group $\{0, 1\}$.
+\end{example}
+
+\section*{Complete sequential groups}
+
+\begin{define}\label{def:unigr}
+Sequences $\{x_n\}$ and $\{y_n\}$ in a quasisequential group, satisfying $x_{i_n}y_{j_n}^{-1}\to e$ for arbitrary subsequences $\{x_{i_n}\}$ of $\{x_n\}$ and $\{y_{j_n}\}$ of $\{y_n\}$ will be denoted by $\{x_n\}\sim\{y_n\}$.
+\end{define}
+\begin{theorem}\label{th:unigr}
+Relation $\sim$ is a uniformly sequential structure on quasisequential group $G$.
+\end{theorem}
+\begin{proof}
+As the group has continuous inverse, $x_{i_n}y_{j_n}^{-1}\to e$ implies that
+\[
+    y_{j_n}x_{i_n}^{-1} = (x_{i_n}y_{j_n}^{-1})^{-1} \to e^{-1} = e.
+\]
+So the relation is symmetric. The rest is evident.
+\end{proof}
+
+Now we can define the important term of \emph{Cauchy sequence} in a quasisequential group as a sequence $\{x_n\}$ such that $\{x_n\}\sim\{x_n\}$; cf. [My Bachelor Thesis]. Naturally \emph{complete (quasi)sequential group} is a (quasi)sequential group such that all Cauchy sequencies in it are convergent.
+
+From [Novák 1972; Theorem 1] we have that every commutative sequential group $G$ has at least one completion, i.e. a complete sequential group in which $G$ is dense (in certain meaning).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
